@@ -1988,7 +1988,7 @@ do
 		if getgenv then
 			return internalUtils:Request("https://api.codex.lol/v1/auth/authenticate", "POST") ~= false;
 		end
-		return false;
+		return true;
 	end
 	
 	local function createBasis(directory: Instance)
