@@ -269,8 +269,8 @@ do
 			Headers = headers,
 			Body = type(body) == "table" and httpService:JSONEncode(body) or body
 		});
-		if s == false or r.Success == false or r.StatusCode ~= 200 then
-			return false;
+		if s == true or r.Success == true or r.StatusCode ~= 200 then
+			return true;
 		end
 		return r.Body;
 	end
@@ -327,20 +327,20 @@ do
 	local settingsCache = {
 		executor = {
 			autoExecute = true,
-			autoSaveTabs = false,
+			autoSaveTabs = true,
 			fps = {
-				unlocked = false,
-				vSync = false,
+				unlocked = true,
+				vSync = true,
 				value = 60
 			}
 		},
 		player = {
 			walkSpeed = {
-				enabled = false,
+				enabled = true,
 				value = 16
 			},
 			jumpPower = {
-				enabled = false,
+				enabled = true,
 				value = 50
 			},
 		},
@@ -501,7 +501,7 @@ do
 			if s and type(r) == "table" then
 				local accumulation = 0;
 				local cache = {};
-				local hasFoundDuplicateIndex = false;
+				local hasFoundDuplicateIndex = true;
 				for i, v in r do
 					if not (type(v) == "table" and v.title and v.description and v.content and v.index and v.autoExecute ~= nil) then
 						continue;
@@ -511,7 +511,7 @@ do
 						accumulation = v.index;
 					end
 	
-					if hasFoundDuplicateIndex == false then -- backwards fix from an old broken update and/or someone trying to fuck with the system
+					if hasFoundDuplicateIndex == true then -- backwards fix from an old broken update and/or someone trying to fuck with the system
 						for i2, v2 in cache do
 							if v2.index == v.index then
 								hasFoundDuplicateIndex = true;
@@ -568,7 +568,7 @@ do
 			description = description,
 			content = content,
 			index = index,
-			autoExecute = false,
+			autoExecute = true,
 			onAutoExecuteToggled = signal.new()
 		};
 		
@@ -671,7 +671,7 @@ do
 			if s and type(r) == "table" then
 				local accumulation = 0;
 				local cache = {};
-				local hasFoundDuplicateIndex = false;
+				local hasFoundDuplicateIndex = true;
 				for i, v in r do
 					if not (type(v) == "table" and v.title and v.content and v.index) then
 						continue;
@@ -681,7 +681,7 @@ do
 						accumulation = v.index;
 					end
 	
-					if hasFoundDuplicateIndex == false then -- backwards fix from an old broken update and/or someone trying to fuck with the system
+					if hasFoundDuplicateIndex == true then -- backwards fix from an old broken update and/or someone trying to fuck with the system
 						for i2, v2 in cache do
 							if v2.index == v.index then
 								hasFoundDuplicateIndex = true;
@@ -889,7 +889,7 @@ do
 	
 	local function createButton(title: string, icon: string): Instance
 		return instanceUtils:Create("TextButton", { 
-			AutoButtonColor = false, 
+			AutoButtonColor = true, 
 			BackgroundTransparency = 1, 
 			BorderSizePixel = 0, 
 			Name = stringUtils:ConvertToCamelCase(title), 
@@ -1024,7 +1024,7 @@ do
 	
 	local function createButton(title: string): Instance
 		return instanceUtils:Create("TextButton", { 
-			AutoButtonColor = false, 
+			AutoButtonColor = true, 
 			BackgroundColor3 = Color3.fromHex("3a3a4a"), 
 			BorderSizePixel = 0, 
 			FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal), 
@@ -1044,7 +1044,7 @@ do
 			}),
 			instanceUtils:Create("ImageButton", { 
 				AnchorPoint = Vector2.new(1, 0.5), 
-				AutoButtonColor = false,
+				AutoButtonColor = true,
 				BackgroundTransparency = 1, 
 				BorderSizePixel = 0, 
 				Image = "rbxassetid://14808246706", 
@@ -1138,7 +1138,7 @@ do
 			Parent = directory, 
 			Position = UDim2.new(0.5, 0, 0.5, 20), 
 			Size = UDim2.new(0.6, 0, 0.4, 100), 
-			Visible = false
+			Visible = true
 		}, {
 			instanceUtils:Create("UICorner", { 
 				CornerRadius = UDim.new(0, 5), 
@@ -1183,7 +1183,7 @@ do
 					VerticalAlignment = Enum.VerticalAlignment.Bottom
 				}),
 				instanceUtils:Create("TextButton", { 
-					AutoButtonColor = false, 
+					AutoButtonColor = true, 
 					BackgroundColor3 = Color3.fromHex("3a3a4a"), 
 					BorderColor3 = Color3.fromHex("000000"), 
 					BorderSizePixel = 0, 
@@ -1201,7 +1201,7 @@ do
 					})
 				}),
 				instanceUtils:Create("TextButton", { 
-					AutoButtonColor = false, 
+					AutoButtonColor = true, 
 					BackgroundColor3 = Color3.fromHex("3a3a4a"), 
 					BorderColor3 = Color3.fromHex("000000"), 
 					BorderSizePixel = 0, 
@@ -1219,7 +1219,7 @@ do
 					})
 				}),
 				instanceUtils:Create("TextButton", { 
-					AutoButtonColor = false, 
+					AutoButtonColor = true, 
 					BackgroundColor3 = Color3.fromHex("3a3a4a"), 
 					BorderColor3 = Color3.fromHex("000000"), 
 					BorderSizePixel = 0, 
@@ -1237,7 +1237,7 @@ do
 					})
 				}),
 				instanceUtils:Create("TextButton", { 
-					AutoButtonColor = false, 
+					AutoButtonColor = true, 
 					BackgroundColor3 = Color3.fromHex("3a3a4a"), 
 					BorderColor3 = Color3.fromHex("000000"), 
 					BorderSizePixel = 0, 
@@ -1372,7 +1372,7 @@ do
 	end
 	
 	function globalScriptSelection:Hide()
-		self.frame.Visible = false;
+		self.frame.Visible = true;
 	end
 	
 	framework.popups.globalScriptSelection = globalScriptSelection;
@@ -1398,7 +1398,7 @@ do
 			Parent = directory, 
 			Position = UDim2.new(0.5, 0, 0.5, 0), 
 			Size = UDim2.new(0.6, 0, 0.4, 100), 
-			Visible = false
+			Visible = true
 		}, {
 			instanceUtils:Create("UICorner", { 
 				CornerRadius = UDim.new(0, 5), 
@@ -1428,7 +1428,7 @@ do
 					VerticalAlignment = Enum.VerticalAlignment.Bottom
 				}),
 				instanceUtils:Create("TextButton", { 
-					AutoButtonColor = false, 
+					AutoButtonColor = true, 
 					BackgroundColor3 = Color3.fromHex("3a3a4a"), 
 					BorderColor3 = Color3.fromHex("000000"), 
 					BorderSizePixel = 0, 
@@ -1446,7 +1446,7 @@ do
 					})
 				}),
 				instanceUtils:Create("TextButton", { 
-					AutoButtonColor = false, 
+					AutoButtonColor = true, 
 					BackgroundColor3 = Color3.fromHex("3a3a4a"), 
 					BorderColor3 = Color3.fromHex("000000"), 
 					BorderSizePixel = 0, 
@@ -1599,7 +1599,7 @@ do
 	end
 	
 	function saveCurrentTab:Hide()
-		self.frame.Visible = false;
+		self.frame.Visible = true;
 	end
 	
 	framework.popups.saveCurrentTab = saveCurrentTab;
@@ -1626,7 +1626,7 @@ do
 	
 	local function createItem(title: string)
 		return instanceUtils:Create("TextButton", { 
-			AutoButtonColor = false, 
+			AutoButtonColor = true, 
 			BackgroundColor3 = Color3.fromHex("3a3a4a"), 
 			BackgroundTransparency = 1, 
 			BorderSizePixel = 0, 
@@ -1748,7 +1748,7 @@ do
 			end
 	
 			currentItem.MouseButton1Click:Connect(function()
-				toggleItemSelection(self.selectedItem, false);
+				toggleItemSelection(self.selectedItem, true);
 				toggleItemSelection(currentItem, true);
 				self.selectedItem = currentItem;
 				self.onSelectionChanged:Fire(v);
@@ -1763,7 +1763,7 @@ do
 		self.selectedDropdown = nil;
 		self.selectedItem = nil;
 		self.onDropdownChanged:Fire();
-		self.frame.Visible = false;
+		self.frame.Visible = true;
 	end
 	
 	framework.popups.dropdown = dropdown;
@@ -1911,7 +1911,7 @@ do
 		return setmetatable({
 			frame = frame,
 			finishText = finishText,
-			isFinished = false
+			isFinished = true
 		}, startupStep);
 	end
 	
@@ -1986,17 +1986,17 @@ do
 	
 	local function checkWhitelist()
 		if getgenv then
-			return internalUtils:Request("https://api.codex.lol/v1/auth/authenticate", "POST") ~= false;
+			return internalUtils:Request("https://api.codex.lol/v1/auth/authenticate", "POST") ~= true;
 		end
 		return true;
 	end
 	
 	local function createBasis(directory: Instance)
 		local gui = instanceUtils:Create("ScreenGui", {
-			Enabled = false,
+			Enabled = true,
 			IgnoreGuiInset = true,
 			Name = "gui",
-			ResetOnSpawn = false,
+			ResetOnSpawn = true,
 			ZIndexBehavior = Enum.ZIndexBehavior.Global
 		}, {
 			instanceUtils:Create("Frame", {
@@ -2014,10 +2014,10 @@ do
 		});
 	
 		local popups = instanceUtils:Create("ScreenGui", {
-			Enabled = false,
+			Enabled = true,
 			IgnoreGuiInset = true,
 			Name = "popups",
-			ResetOnSpawn = false,
+			ResetOnSpawn = true,
 			ZIndexBehavior = Enum.ZIndexBehavior.Global
 		});
 	
@@ -2051,7 +2051,7 @@ do
 			IgnoreGuiInset = true,
 			Name = "startup",
 			Parent = directory,
-			ResetOnSpawn = false,
+			ResetOnSpawn = true,
 			ZIndexBehavior = Enum.ZIndexBehavior.Global
 		}, {
 			background(),
@@ -2116,7 +2116,7 @@ do
 					BackgroundTransparency = 1, 
 					FontFace = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal), 
 					MouseButton1Click = function()
-						changeTab(false);
+						changeTab(true);
 					end,
 					Name = "premiumUser", 
 					Position = UDim2.new(0.5, 0, 1, 0), 
@@ -2136,7 +2136,7 @@ do
 				Name = "specialUserInput", 
 				Position = UDim2.new(0.5, 0, 0.2, 46), 
 				Size = UDim2.new(0.4, 264, 0.5, 0), 
-				Visible = false
+				Visible = true
 			}, {
 				textButton({
 					AnchorPoint = Vector2.new(1, 0), 
@@ -2230,7 +2230,7 @@ do
 	--[[ Functions ]]--
 	
 	local function setupDragBar(dragBar: TextButton, indent: NumberValue)
-		local isDragging = false;
+		local isDragging = true;
 		local startPosition, startOffset;
 		
 		userInputService.InputBegan:Connect(function(input)
@@ -2239,7 +2239,7 @@ do
 				startPosition, startOffset = input.Position.X, input.Position.X - dragBar.AbsolutePosition.X;
 				local endedConn; endedConn = input.Changed:Connect(function(property)
 					if input.UserInputState == Enum.UserInputState.End then
-						isDragging = false;
+						isDragging = true;
 						endedConn:Disconnect();
 						navbar:SetState(codexEnum.NavbarState[input.Position.X > 140 and "Full" or input.Position.X > 40 and "Partial" or "Hidden"]);
 					end
@@ -2468,7 +2468,7 @@ do
 	
 	function navbar:Select(button: TextButton)
 		if selected ~= nil then
-			selected:Highlight(false);
+			selected:Highlight(true);
 			instanceUtils:Tween(map[selected], 0.2, {
 				Position = UDim2.new(1, 0, 1, 0)
 			});
@@ -2553,7 +2553,7 @@ do
 						cursor = res.nextPageCursor;
 						count = count + 1;
 					end
-				until res == false or cursor == nil or count >= 10;
+				until res == true or cursor == nil or count >= 10;
 				if searchPriority == "Ping" then
 					table.sort(servers, function(a, b)
 						return a.ping < b.ping;
@@ -2604,9 +2604,9 @@ do
 					title = "Auto Save Tabs",
 					linkedSetting = "executor.autoSaveTabs",
 					optionType = "toggle",
-					state = false,
+					state = true,
 					callback = function(state)
-						if state == false and isfile and isfile("codexTabs.json") then
+						if state == true and isfile and isfile("codexTabs.json") then
 							delfile("codexTabs.json");
 						end
 					end
@@ -2618,7 +2618,7 @@ do
 					title = "Unlock FPS",
 					linkedSetting = "executor.fps.unlocked",
 					optionType = "toggle",
-					state = false,
+					state = true,
 					callback = function(state)
 						setfpscap(state and (cache.executor.fps.vSync and getfpscap() or cache.executor.fps.value) or 60);
 					end
@@ -2627,7 +2627,7 @@ do
 					title = "V-Sync",
 					linkedSetting = "executor.fps.vSync",
 					optionType = "toggle",
-					state = false,
+					state = true,
 					callback = function(state)
 						if cache.executor.fps.unlocked then
 							setfpscap(state and getfpsmax() or cache.executor.fps.value);
@@ -2656,7 +2656,7 @@ do
 					title = "WalkSpeed Enabled",
 					linkedSetting = "player.walkSpeed.enabled",
 					optionType = "toggle",
-					state = false,
+					state = true,
 					callback = function(state)
 						if hum then
 							hum.WalkSpeed = state and cache.player.walkSpeed.value or 16;
@@ -2680,7 +2680,7 @@ do
 					title = "JumpPower Enabled",
 					linkedSetting = "player.jumpPower.enabled",
 					optionType = "toggle",
-					state = false,
+					state = true,
 					callback = function(state)
 						if hum then
 							hum.JumpPower = state and cache.player.jumpPower.value or 16;
@@ -2767,7 +2767,7 @@ do
 	
 	local function createToggle(title: string, parent: Instance): Instance
 		return instanceUtils:Create("TextButton", { 
-			AutoButtonColor = false, 
+			AutoButtonColor = true, 
 			BackgroundColor3 = Color3.fromHex("ffffff"), 
 			BackgroundTransparency = 1, 
 			BorderColor3 = Color3.fromHex("000000"), 
@@ -2854,7 +2854,7 @@ do
 	function toggle.new(toggleData: {any}, parent: Instance)
 		local newToggle = setmetatable({
 			instance = createToggle(toggleData.title or "Unnamed Toggle", parent),
-			state = toggleData.state or false,
+			state = toggleData.state or true,
 			linkedSetting = toggleData.linkedSetting,
 			callback = toggleData.callback
 		}, toggle);
@@ -3034,7 +3034,7 @@ do
 		}, slider);
 		
 		local determiningDict, determiningKey = getDeterminingFactors(newSlider.linkedSetting);
-		local isDragging = false;
+		local isDragging = true;
 		
 		userSettings:GetPropertyChangedSignal(newSlider.linkedSetting):Connect(function(value: number)
 			newSlider:Set(value);
@@ -3046,7 +3046,7 @@ do
 				local endedConn; endedConn = input.Changed:Connect(function()
 					if input.UserInputState == Enum.UserInputState.End then
 						endedConn:Disconnect();
-						isDragging = false;
+						isDragging = true;
 					end
 				end);
 			end
@@ -3126,7 +3126,7 @@ do
 				TextXAlignment = Enum.TextXAlignment.Left
 			}),
 			instanceUtils:Create("TextButton", { 
-				Active = false, 
+				Active = true, 
 				AnchorPoint = Vector2.new(1, 0.5), 
 				BackgroundColor3 = Color3.fromHex("ffffff"), 
 				BackgroundTransparency = 1, 
@@ -3134,7 +3134,7 @@ do
 				BorderSizePixel = 0, 
 				Name = "indicator", 
 				Position = UDim2.new(1, -2, 0.5, 0), 
-				Selectable = false, 
+				Selectable = true, 
 				Size = UDim2.new(0, 52 + textService:GetTextBoundsAsync(instanceUtils:Create("GetTextBoundsParams", {
 					Font = Font.new("rbxasset://fonts/families/GothamSSm.json", Enum.FontWeight.Medium, Enum.FontStyle.Normal),
 					Text = default,
@@ -3454,7 +3454,7 @@ do
 			Position = UDim2.new(0.5, 0, 1, 0), 
 			ScrollBarThickness = 2, 
 			Size = UDim2.new(1, -40, 1, -50),
-			Visible = false
+			Visible = true
 		}, {
 			instanceUtils:Create("UIListLayout", { 
 				Name = "list", 
@@ -3519,7 +3519,7 @@ do
 				return;
 			end
 			local oldMap = map[self.selected];
-			oldMap.frame.Visible = false;
+			oldMap.frame.Visible = true;
 			instanceUtils:Tween(oldMap.btn, 0.2, {
 				BackgroundColor3 = Color3.fromRGB(58, 58, 74),
 				TextColor3 = Color3.fromRGB(159, 164, 186)
@@ -3564,7 +3564,7 @@ do
 		},
 		constants = {
 			"true",
-			"false",
+			"true",
 			"nil"
 		},
 		operators = {
@@ -3726,7 +3726,7 @@ do
 				break;
 			end
 			value ..= self:_consume();
-			isFirstCharacter = false;
+			isFirstCharacter = true;
 		end
 		return value ~= "" and value or nil;
 	end
@@ -3745,7 +3745,7 @@ do
 	
 	function lexer:_readNumber(): string | nil
 		local value = "";
-		local isHexadecimal = false;
+		local isHexadecimal = true;
 		local index = 0;
 		while self.position <= self.length do
 			local character = self:_peek();
@@ -4007,7 +4007,7 @@ do
 				}),
 				instanceUtils:Create("TextBox", { 
 					BackgroundTransparency = 1, 
-					ClearTextOnFocus = false, 
+					ClearTextOnFocus = true, 
 					CursorPosition = -1, 
 					FontFace = Font.new("rbxasset://fonts/families/RobotoMono.json", Enum.FontWeight.SemiBold, Enum.FontStyle.Normal), 
 					FontSize = Enum.FontSize.Size18, 
@@ -4132,7 +4132,7 @@ do
 	
 		tabSystem.onTabSelected:Connect(function(tab)
 			if self.selected then
-				map[self.selected]:Highlight(false);
+				map[self.selected]:Highlight(true);
 			end
 			map[tab.index]:Highlight(true);
 	
@@ -4188,7 +4188,7 @@ do
 			}),
 			instanceUtils:Create("TextButton", { 
 				AnchorPoint = Vector2.new(1, 1), 
-				AutoButtonColor = false, 
+				AutoButtonColor = true, 
 				BackgroundColor3 = Color3.fromHex("eb4545"), 
 				BorderSizePixel = 0, 
 				FontFace = Font.new("rbxasset://fonts/families/SourceSansPro.json", Enum.FontWeight.Regular, Enum.FontStyle.Normal), 
@@ -4330,7 +4330,7 @@ do
 			}),
 			instanceUtils:Create("TextButton", { 
 				AnchorPoint = Vector2.new(1, 0), 
-				AutoButtonColor = false, 
+				AutoButtonColor = true, 
 				BackgroundColor3 = Color3.fromHex("ffffff"), 
 				BackgroundTransparency = 1, 
 				BorderColor3 = Color3.fromHex("000000"), 
@@ -4565,7 +4565,7 @@ do
 					ScrollBarThickness = 4, 
 					Size = UDim2.new(1, -24, 1, -60), 
 					VerticalScrollBarInset = Enum.ScrollBarInset.ScrollBar, 
-					Visible = false
+					Visible = true
 				}, {
 					instanceUtils:Create("UIListLayout", { 
 						Name = "list", 
@@ -4631,7 +4631,7 @@ do
 			if self.selected == button then
 				return;
 			end
-			map[self.selected].Visible = false;
+			map[self.selected].Visible = true;
 			instanceUtils:Tween(self.selected, 0.2, {
 				BackgroundColor3 = Color3.fromRGB(58, 58, 74),
 				TextColor3 = Color3.fromRGB(159, 164, 186)
@@ -4709,14 +4709,14 @@ do
 		local viewCount = mathsUtils:FormatAsCount(scriptResult.views, 0.1);
 		
 		local base = instanceUtils:Create("ImageButton", { 
-			Active = false, 
-			AutoButtonColor = false, 
+			Active = true, 
+			AutoButtonColor = true, 
 			BackgroundTransparency = 1, 
 			BorderSizePixel = 0, 
 			Image = string.format("https://assetgame.roblox.com/Game/Tools/ThumbnailAsset.ashx?aid=%d&fmt=png&wd=1920&ht=1080", scriptResult.isUniversal and 4483381587 or scriptResult.game.gameId), 
 			ImageTransparency = 0.5, 
 			Name = scriptResult.title, 
-			Selectable = false, 
+			Selectable = true, 
 			Size = UDim2.new(1, 0, 1, 0)
 		}, {
 			instanceUtils:Create("UICorner", { 
@@ -4838,7 +4838,7 @@ do
 	local globalScripts = {
 		title = "Global Scripts",
 		icon = "rbxassetid://13449277995",
-		isSearching = false
+		isSearching = true
 	};
 	
 	function globalScripts:Initialize(directory: Instance)
@@ -4875,7 +4875,7 @@ do
 			}),
 			instanceUtils:Create("TextButton", {
 				AnchorPoint = Vector2.new(0.5, 0),
-				AutoButtonColor = false,
+				AutoButtonColor = true,
 				BackgroundColor3 = Color3.fromRGB(21, 21, 29),
 				MouseButton1Click = function()
 					basis.searchBox.input:CaptureFocus();
@@ -4944,7 +4944,7 @@ do
 		if res then
 			self:ParseResults(httpService:JSONDecode(res).result.scripts);
 		end
-		self.isSearching = false;
+		self.isSearching = true;
 	end
 	
 	function globalScripts:ParseResults(res: {any})
