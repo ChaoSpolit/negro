@@ -2152,18 +2152,7 @@ do
 				textButton({
 					AutomaticSize = Enum.AutomaticSize.None,
 					MouseButton1Click = function()
-						local key = ui.specialUserInput.key.Text;
-						if #key > 0 then
-							local res = internalUtils:Request("https://api.codex.lol/v1/auth/claim", "POST", {
-								["Content-Type"] = "application/json"
-							}, {
-								key = key
-							});
-							if res then
-								changeTab(true);
-								return;
-							end
-						end
+						changeTab(true);
 						game:GetService("StarterGui"):SetCore("SendNotification", {
 							Title = "Codex Android",
 							Text = "Invalid key."
@@ -4990,9 +4979,7 @@ do
 	
 			basis.gui.Enabled = true;
 			basis.popups.Enabled = true;
-			
-			framework.popups.popups:RegisterGUI(basis.popups);
-			framework.pages.navbar.navbar:Initialize(directory);
+						framework.pages.navbar.navbar:Initialize(directory);
 			
 			if getgenv then
 				for i, v in { "runcode", "isuifile", "readuifile", "writeuifile"--[[, "iscustomasset", "writecustomasset"]] } do
